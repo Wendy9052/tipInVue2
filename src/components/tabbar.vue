@@ -36,7 +36,7 @@ export default {
       console.log("当前页面：",e)
       if(e == "message") {
         this.$router.replace({
-          name: "addressList"
+          name: "message"
         })
       }
       else if(e == "address") {

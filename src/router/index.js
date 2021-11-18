@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import home from '@/view/home'
+import message from '@/view/message'
 import addressList from '@/view/addressList'
 import find from '@/view/find'
 import me from '@/view/me'
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      name: 'message',
+      component: message
     },
     {
       path: '/address_list',
