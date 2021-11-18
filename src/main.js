@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import Vue from 'vue'
 import CircleMenu from 'vue-circle-menu'
-Vue.component('CircleMenu', CircleMenu)
+import Vant from 'vant';
+import 'vant/lib/index.css';
+import Vuex from 'vuex'
+import store from './store/index'
 
+Vue.use(Vuex)
+Vue.component('CircleMenu', CircleMenu)
+Vue.use(Vant);
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
