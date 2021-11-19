@@ -11,7 +11,8 @@ import card from '@/view/me/card'
 import expression from '@/view/me/expression'
 import payment from '@/view/me/payment'
 import set from '@/view/me/set'
-
+import chat from '@/view/message/chat.vue'
+import chatDetail from '@/view/message/chatDetail.vue'
 
 Vue.use(Router)
 
@@ -21,6 +22,16 @@ export default new Router({
       path: '/',
       name: 'message',
       component: message
+    },
+    {
+      path: '/message/chat',
+      name: 'chat',
+      component: chat
+    },
+    {
+      path: '/message/chatDetail',
+      name: 'chatDetail',
+      component: chatDetail
     },
     {
       path: '/address_list',

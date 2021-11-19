@@ -17,7 +17,7 @@
           <div class="pay_box_text">钱包</div>
         </div>
       </div>
-      <div class="card_box" v-for="(card_item) in functionList" :key="card_item.id">
+      <div class="card_box" v-for="(card_item,index) in functionList" :key="index">
         <div class="card_title">{{ card_item.title }}</div>
         <van-grid :border="false">
           <van-grid-item :column-num="4" v-for="(item,index) in card_item.item_list" :key="index">
@@ -74,6 +74,20 @@
                 item_icon: "thumb-circle-o",
               }
             ]
+          },
+          {
+            title: "交通出行",
+            id: 1,
+            item_list: [
+              {
+                item_text: "手机充值",
+                item_icon: "refund-o",
+              },
+              {
+                item_text: "生活缴费",
+                item_icon: "thumb-circle-o",
+              }
+            ]
           }
         ]
       }
@@ -99,6 +113,7 @@
 .payment_page{
   padding: 8px;
   background: rgba(204,204,204,0.3);
+  height: 100vh;
   .tip_text{
     font-size: 20px;
     text-align: center;
@@ -107,7 +122,7 @@
     margin-bottom: 20px;
   }
   .card_box{
-    padding: 15px 15px 20px;
+    padding: 15px 10px 15px;
     background: #fff;
     margin-top: 8px;
     border-radius: 6px;
