@@ -1,4 +1,5 @@
 <template>
+  <!-- 组件来源：https://www.cnblogs.com/xiaofenguo/p/12858785.html?ivk_sa=1024320u -->
   <canvas ref='myCanvas'></canvas>
 </template>
 <script>
