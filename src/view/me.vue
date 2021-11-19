@@ -22,7 +22,7 @@
     </van-cell-group>
 
     <van-cell-group>
-      <van-cell is-link center>
+      <van-cell is-link center @click="toFeature('payment')">
         <template #title>
           <div class="left_box">
             <div class="icon_box">
@@ -37,7 +37,7 @@
     </van-cell-group>
 
     <van-cell-group>
-      <van-cell v-for="(item,index) in featureList" :key="index" is-link center>
+      <van-cell v-for="(item,index) in featureList" :key="index" is-link center @click="toFeature(item.url)">
         <template #title>
             <div class="left_box">
                 <div class="icon_box">
@@ -50,7 +50,7 @@
     </van-cell-group>
 
     <van-cell-group>
-      <van-cell is-link center>
+      <van-cell is-link center @click="toFeature('set')">
         <template #title>
           <div class="left_box">
             <div class="icon_box">
@@ -79,21 +79,36 @@ export default {
       featureList: [
         {
           text: '收藏',
-          icon: "star-o"
+          icon: "star-o",
+          url: "store"
         },
         {
           text: '咖咖圈',
-          icon: "friends-o"
+          icon: "friends-o",
+          url: "share_place"
         },
         {
           text: '卡包',
-          icon: "coupon-o"
+          icon: "coupon-o",
+          url: "card"
         },
         {
           text: '表情',
-          icon: "smile-o"
+          icon: "smile-o",
+          url: "expression"
         }
       ],
+    }
+  },
+  methods: {
+    // 跳转至相应功能的页面
+    toFeature(url) {
+      console.log("url",url)
+      let path = "me/" + url
+      console.log("path",path)
+      this.$router.push({
+        path: path
+      })
     }
   }
 }
