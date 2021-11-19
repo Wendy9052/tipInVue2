@@ -14,23 +14,27 @@ export default{
       offsetX:40,
       offsetY:30,
       password:[0,1,2,3,4],
-      successColor:'#627eed',
+      // successColor:'#627eed', //蓝色
+      successColor:'#008000', //绿色
       errorColor:'red',
       innerColor:'',
-      successInnerColor:'#ffffff',
+      // successInnerColor:'#ffffff',
+      successInnerColor:'#90EE90', //浅绿色
+      defaultInnerColor:'#D3D3D3', //浅灰色
       errorInnerColor:'#ffffff',
       selectColor:'',
       Re:[],
       borderWidth:1,
       pointLine:[],
       pointWidth:8,//圆心的半径大小
-      lineWidth:3//连线的大小
+      lineWidth:3,//连线的大小
+      outerLayerColor:"#D3D3D3" //浅灰色
     }
   },
   mounted(){
     let _this=this;
     this.selectColor=this.successColor;
-    this.innerColor=this.successInnerColor;
+    this.innerColor=this.defaultInnerColor;
      this.$nextTick(function(){
       _this.init();
       _this.initEvent();
@@ -135,7 +139,7 @@ export default{
       setTimeout(()=>{
           this.pointLine=[];
           this.selectColor=this.successColor;
-          this.innerColor=this.successInnerColor;
+          this.innerColor=this.defaultInnerColor;
           this.cxt.clearRect(0,0,_this.CW,_this.CH);
           this.draw(touches,false);
       },3000);
@@ -144,6 +148,9 @@ export default{
       if(this.password.toString()!=this.pointLine.toString()){
          this.selectColor=this.errorColor;
         this.innerColor=this.errorInnerColor;
+      }else {
+        // 若密码输入正确
+        this.$emit("checkPsw","pass")
       }
     },
     draw(touches,touchPonit){
@@ -153,8 +160,8 @@ export default{
       let Re=this.Re;
       for(let i=0; i<Re.length;i++){
         let point=Re[i];
-        //画外层蓝色的圆
-        this.cxt.fillStyle=this.selectColor;
+        //画外层蓝色的圆(改成灰色)
+        this.cxt.fillStyle=this.outerLayerColor;
         this.cxt.beginPath();
         this.cxt.arc(point.x,point.y,this.Radius,0,2*Math.PI,true);//圆心x坐标，y坐标，圆的半径，从0 画到360，逆时针画图
         this.cxt.fill();

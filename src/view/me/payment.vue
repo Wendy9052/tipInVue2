@@ -1,8 +1,10 @@
 <template>
   <div class="payment_page">
-    <div class="tip_text">请输入手势密码</div>
-    <!-- <button @click="showClicked" style="width:90px;height:50px;font-size:16px;background-color:#eee">手势密码</button> -->
-    <pwd></pwd>
+    <!-- 输入手势密码部分 -->
+    <div v-if="ifShowPsw">
+      <div class="tip_text">请输入手势密码</div>
+      <pwd @checkPsw="checkPsw"></pwd>
+    </div>
   </div>
 </template>
  
@@ -11,9 +13,13 @@
   import pwd from '@/components/gesturePsw'
   export default {
     name: '',
+    components: {
+      pwd
+    },
     data() {
       return {
-        showPwd: false
+        showPwd: false,
+        ifShowPsw: true, //是否显示手势密码
       }
     },
     methods: {
@@ -22,11 +28,13 @@
       },
       handPwd(val) {
         console.log(val);
+      },
+      checkPsw(val) {
+        console.log("ifpass?",val)
+        if(val == "pass") {
+          this.ifShowPsw = false
+        }
       }
-    },
-    components: {
-      pwd
-
     },
   }
 </script>
