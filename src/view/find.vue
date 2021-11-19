@@ -1,33 +1,33 @@
 <template>
   <div class="find_page">
-    <van-cell class="cell_item" value="内容" is-link >
+    <van-cell class="cell_item" is-link >
       <template #title>
         <div class="left_part">
-          <div><van-icon size="25" name="flower-o" /></div>
+          <div><van-icon size="20" name="flower-o" /></div>
           <div class="left_part_text">咖咖圈</div>
         </div>
       </template>
     </van-cell>
-    <van-cell class="cell_item" value="内容" is-link >
+    <van-cell class="cell_item" is-link >
       <template #title>
         <div class="left_part">
-          <div><van-icon size="25" name="scan" /></div>
+          <div><van-icon size="20" name="scan" /></div>
           <div class="left_part_text">扫一扫</div>
         </div>
       </template>
     </van-cell>
-    <van-cell class="cell_item" value="内容" is-link >
+    <van-cell class="cell_item" is-link >
       <template #title>
         <div class="left_part">
-          <div><van-icon size="25" name="video-o" /></div>
+          <div><van-icon size="20" name="video-o" /></div>
           <div class="left_part_text">直播</div>
         </div>
       </template>
     </van-cell>
-    <van-cell class="cell_item" value="内容" is-link >
+    <van-cell class="cell_item" is-link >
       <template #title>
         <div class="left_part">
-          <div><van-icon size="25" name="setting-o" /></div>
+          <div><van-icon size="20" name="setting-o" /></div>
           <div class="left_part_text">设置</div>
         </div>
       </template>
