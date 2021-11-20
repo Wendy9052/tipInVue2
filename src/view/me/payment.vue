@@ -6,7 +6,7 @@
       <pwd @checkPsw="checkPsw"></pwd>
     </div>
     <!-- 卡片部分 -->
-    <div v-if="!ifShowPsw">
+    <div v-else>
       <div class="pay_box">
         <div class="icon_box">
           <van-icon size="28" name="paid" />
@@ -51,6 +51,22 @@
             title: "金融理财",
             id: 1,
             item_list: [
+              {
+                item_text: "信用卡还款",
+                item_icon: "refund-o",
+              },
+              {
+                item_text: "理财通",
+                item_icon: "balance-o",
+              },
+              {
+                item_text: "信用卡还款",
+                item_icon: "refund-o",
+              },
+              {
+                item_text: "理财通",
+                item_icon: "balance-o",
+              },
               {
                 item_text: "信用卡还款",
                 item_icon: "refund-o",
