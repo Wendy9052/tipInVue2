@@ -11,6 +11,9 @@
         <template #default>
           <div v-if="item.type == 'img'" class="avatars_box">
             <img :src="item.value" alt="">
+            <div v-if="item.text == '头像'">
+              <!-- <van-uploader :after-read="afterRead" /> -->
+            </div>
           </div>
           <div v-if="item.type == 'text'" >
             {{ item.value }}
