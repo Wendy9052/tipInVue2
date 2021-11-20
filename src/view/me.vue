@@ -1,7 +1,7 @@
 <template>
   <div class="me_page">
     <van-cell-group>
-      <van-cell value="内容" is-link center>
+      <van-cell value="内容" is-link center @click="toFeature('personal')">
         <template #title>
           <div class="left_part">
             <div class="img_box">
@@ -101,6 +101,7 @@ export default {
     }
   },
   methods: {
+    // 跳转至个人信息页面
     // 跳转至相应功能的页面
     toFeature(url) {
       console.log("url",url)

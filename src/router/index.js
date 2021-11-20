@@ -11,22 +11,26 @@ import card from '@/view/me/card'
 import expression from '@/view/me/expression'
 import payment from '@/view/me/payment'
 import set from '@/view/me/set'
+import personal from '@/view/me/personal.vue'
+
 import chat from '@/view/message/chat.vue'
 import chatDetail from '@/view/message/chatDetail.vue'
+
+
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'message',
-      component: message
+      path: '/',  
+      name: 'message',  
+      component: message  //聊天列表
     },
     {
       path: '/message/chat',
       name: 'chat',
-      component: chat
+      component: chat 
     },
     {
       path: '/message/chatDetail',
@@ -36,47 +40,52 @@ export default new Router({
     {
       path: '/address_list',
       name: 'addressList',
-      component: addressList
+      component: addressList  //通讯录列表
     },
     {
       path: '/find',
       name: 'find',
-      component: find
+      component: find //发现页
     },
     {
       path: '/me',
       name: 'me',
-      component: me
+      component: me //我的页面
     },
     {
       path: '/me/store',
       name: 'store',
-      component: store
+      component: store  //收藏
     },
     {
       path: '/me/share_place',
       name: 'share_place',
-      component: share_place
+      component: share_place  //咖咖圈页面
     },
     {
       path: '/me/card',
       name: 'card',
-      component: card
+      component: card  //卡包
     },
     {
       path: '/me/expression',
       name: 'expression',
-      component: expression
+      component: expression //表情
     },
     {
       path: '/me/payment',
       name: 'payment',
-      component: payment
+      component: payment  //支付
     },
     {
       path: '/me/set',
       name: 'set',
-      component: set
+      component: set  //设置
+    },
+    {
+      path: '/me/personal',
+      name: 'personal',
+      component: personal  //设置
     }
   ]
 })

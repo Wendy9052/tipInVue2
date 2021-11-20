@@ -38,14 +38,14 @@
       :style="{ height: '25%' , background: '#F5F5F5' }"
     >
       <van-cell-group>
-        <van-cell center @click="quitOuit()">
+        <van-cell center>
           <template #title>
             <div class="left_box">
               <div class="btn_text">退出登录</div>
             </div>
           </template>
         </van-cell>
-        <van-cell center @click="quitOuit()">
+        <van-cell center>
           <template #title>
             <div class="left_box">
               <div class="btn_text">关闭微信</div>
@@ -54,7 +54,7 @@
         </van-cell>
       </van-cell-group>
       <van-cell-group>
-        <van-cell center @click="quitOuit()">
+        <van-cell center>
           <template #title>
             <div class="left_box">
               <div class="btn_text">取消</div>
