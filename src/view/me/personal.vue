@@ -1,6 +1,22 @@
 <template>
   <div class="personal_page">
 
+    <van-cell is-link center>
+      <template #title>
+          <div class="left_box">
+              <div class="text">头像</div>
+          </div>
+      </template>
+      <template #default>
+        <van-uploader multiple v-model="fileList" :after-read="afterRead" accept="image/*"> 
+          <div class="avatars_box">
+              <img :src="avatars_url" alt="">
+          </div>
+        </van-uploader>
+       
+      </template>
+    </van-cell>
+
     <van-cell-group v-for="(item,index) in featureList" :key="index">
       <van-cell v-for="(item,index) in item.itemList" :key="index" is-link center @click="toFeature(item.url)">
         <template #title>
@@ -11,9 +27,6 @@
         <template #default>
           <div v-if="item.type == 'img'" class="avatars_box">
             <img :src="item.value" alt="">
-            <div v-if="item.text == '头像'">
-              <!-- <van-uploader :after-read="afterRead" /> -->
-            </div>
           </div>
           <div v-if="item.type == 'text'" >
             {{ item.value }}
@@ -29,52 +42,45 @@
 </template>
 
 <script>
-// import Vue from 'vue';
-// import { Popup } from 'vant';
-
-// Vue.use(Popup);
 export default {
   components: {
   },
   data() {
     return {
+      fileList: [],
+      avatars_url: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4",
       featureList: [
         {
           itemList: [
             {
-              text: '头像',
-              icon: "friends-o",
-              url: "share_place",
-              type: "img",
-              value: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4"
-            },
-            {
               text: '昵称',
               icon: "coupon-o",
-              url: "card",
+              url: "",
               type: "text",
               value: "wendy"
             },
             {
               text: '拍一拍',
+              url: "",
               icon: "smile-o",
               url: "expression"
             },
             {
               text: '微信号',
               icon: "smile-o",
-              url: "expression",
+              url: "",
               type: "text",
               value: "sdddiTJ"
             },
             {
               text: '二维码名片',
               icon: "qr",
-              url: "expression",
+              url: "qr_card",
               type: "icon",
             },
             {
               text: '更多信息',
+              url: "",
               icon: "smile-o",
               url: "expression"
             }
@@ -103,14 +109,24 @@ export default {
     }
   },
   methods: {
+    afterRead(file) {
+      console.log("file",file)
+      var formData = new FormData(); //构造一个 FormData，把后台需要发送的参数添加
+　　   formData.append('file', file.file); //接口需要传的参数
+      console.log("formData",formData)
+      //显示值
+      for (var value of formData.values()) {
+        console.log("formData_value",value);
+      }
+    },
     // 跳转至相应功能的页面
     toFeature(url) {
       console.log("url",url)
-      // let path = "me/" + url
-      // console.log("path",path)
-      // this.$router.push({
-      //   path: path
-      // })
+      let path = "/me/" + url
+      console.log("path",path)
+      this.$router.push({
+        path: path
+      })
     }
   }
 }
