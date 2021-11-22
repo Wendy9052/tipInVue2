@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { getData } from '@/api/api'
 import Tabbar from '../components/tabbar.vue'
 export default {
   components: {
@@ -37,15 +38,19 @@ export default {
 
   },
   methods: {
-    init() {
+    async init() {
       this.indexList.push("↑")
       for(let i = 0; i < 26; i++) {
-        console.log("大写字母字母",String.fromCharCode(65+i))
-        console.log("小写字母",String.fromCharCode(97+i))
+        // console.log("大写字母字母",String.fromCharCode(65+i))
+        // console.log("小写字母",String.fromCharCode(97+i))
         this.indexList.push(String.fromCharCode(65+i))
-
       }
       console.log(this.indexList)
+      await getData().then(res => {
+        console.log("返回值：",res)
+      }).catch(err => {
+        console.log("ddd",err)
+      })
     }
   }
 }

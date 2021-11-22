@@ -6,7 +6,11 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import Vuex from 'vuex'
 import store from './store/index'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import './mock/mock.js'
 
+Vue.use(VueAxios, axios)
 Vue.use(Vuex)
 Vue.component('CircleMenu', CircleMenu)
 Vue.use(Vant);
