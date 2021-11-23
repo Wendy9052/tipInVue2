@@ -37,7 +37,6 @@
         </template>
       </van-cell>
     </van-cell-group>
-
   </div>
 </template>
 
@@ -99,7 +98,7 @@ export default {
             {
               text: '我的地址',
               icon: "friends-o",
-              url: "share_place"
+              url: "my_address"
             }
           ]
         },

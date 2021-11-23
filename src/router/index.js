@@ -14,6 +14,8 @@ import set from '@/view/me/set'
 import personal from '@/view/me/personal.vue'
 import qr_card from '@/view/me/qr_card.vue'
 import more_msg from '@/view/me/more_msg.vue'
+import my_address from '@/view/me/my_address.vue'
+
 
 import chat from '@/view/message/chat.vue'
 import chatDetail from '@/view/message/chatDetail.vue'
@@ -98,6 +100,11 @@ export default new Router({
       path: '/me/more_msg',
       name: 'more_msg',
       component: more_msg  //更多信息
+    },
+    {
+      path: '/me/my_address',
+      name: 'my_address',
+      component: my_address  //添加地址
     }
   ]
 })

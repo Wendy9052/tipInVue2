@@ -28,7 +28,6 @@
           class="sign_box"
           border
         />
-        <!-- <van-divider /> -->
       </div>
     </div>
     
