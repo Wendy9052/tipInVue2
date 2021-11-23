@@ -80,9 +80,8 @@ export default {
             },
             {
               text: '更多信息',
-              url: "",
               icon: "smile-o",
-              url: "expression"
+              url: "more_msg"
             }
           ]
         },

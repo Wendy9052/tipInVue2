@@ -13,6 +13,7 @@ import payment from '@/view/me/payment'
 import set from '@/view/me/set'
 import personal from '@/view/me/personal.vue'
 import qr_card from '@/view/me/qr_card.vue'
+import more_msg from '@/view/me/more_msg.vue'
 
 import chat from '@/view/message/chat.vue'
 import chatDetail from '@/view/message/chatDetail.vue'
@@ -86,12 +87,17 @@ export default new Router({
     {
       path: '/me/personal',
       name: 'personal',
-      component: personal  //设置
+      component: personal  //个人信息
     },
     {
       path: '/me/qr_card',
       name: 'qr_card',
-      component: qr_card  //设置
+      component: qr_card  //二维码名片
+    },
+    {
+      path: '/me/more_msg',
+      name: 'more_msg',
+      component: more_msg  //更多信息
     }
   ]
 })
