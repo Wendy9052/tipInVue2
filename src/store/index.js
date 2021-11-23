@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import persistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -31,7 +32,10 @@ const store = new Vuex.Store({
     SET_COUNT(context, payload) {
       context.commit("set_count", payload)
     }
-  }
+  },
+  plugins: [persistedState({
+    storage:window.sessionStorage
+  })]
 })
 
 export default store

@@ -8,12 +8,12 @@
         <van-cell v-for="(item,index) in addressList" :key="index">
           <template #title>
             <div>
-              <span>姓名</span>
-              <span>12345654888</span>
+              <span>{{item.username}}</span>
+              <span>{{item.validator}}</span>
             </div>
             <div class="address_text">
-              <span>地址</span>
-              <span>详细地址</span>
+              <span>{{item.address}}</span>
+              <span>{{item.address_detail}}</span>
             </div>
           </template>
         </van-cell>
@@ -78,6 +78,7 @@ export default {
       address: '',
       address_detail: '',
       post_code: '',
+      formList: [],
     }
   },
   computed: {
@@ -98,10 +99,9 @@ export default {
       console.log("添加地址")
     },
     onSubmit(values) {
-      let formList = []
-      formList.push(values)
-      this.SET_ADDRESS_LIST(formList)
-      console.log('submit', values);
+      this.formList.push(values)
+      this.SET_ADDRESS_LIST(this.formList)
+      console.log('submit', this.addressList);
       this.showAdd = true
     },
   }
