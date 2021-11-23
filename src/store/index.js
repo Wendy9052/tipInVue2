@@ -9,8 +9,13 @@ const store = new Vuex.Store({
       count: 0,
       addressList: [],  //地址列表
       sign: "", //个性签名
+      sex: "", //性别
+      nickname: "", //昵称
   },
   getters: {
+    getSex(state) {
+      return state.sex  //存性别
+    },
     getAddressList(state) {
       return state.addressList
     },
@@ -19,6 +24,12 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    set_nickname(state, payload) {
+      state.nickname = payload  //存昵称
+    },
+    set_sex(state, payload) {
+      state.sex = payload   //存性别
+    },
     set_sign(state, payload) {
       state.sign = payload  //存个性签名
     },
@@ -30,6 +41,12 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_NICKNAME(context, payload) {
+      context.commit("set_nickname", payload) //存昵称
+    },
+    SET_SEX(context, payload) {
+      context.commit("set_sex", payload) //存性别
+    },
     SET_SIGN(context, payload) {
       context.commit("set_sign", payload) //存个性签名
     },
