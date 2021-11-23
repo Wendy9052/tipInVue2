@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import message from '@/view/message'
 import addressList from '@/view/addressList'
 import find from '@/view/find'
+import kaka from '@/view/find/kaka.vue'
+
 import me from '@/view/me'
 import store from '@/view/me/store'
 import share_place from '@/view/me/share_place'
@@ -15,6 +17,7 @@ import personal from '@/view/me/personal.vue'
 import qr_card from '@/view/me/qr_card.vue'
 import more_msg from '@/view/me/more_msg.vue'
 import my_address from '@/view/me/my_address.vue'
+
 
 
 import chat from '@/view/message/chat.vue'
@@ -50,6 +53,11 @@ export default new Router({
       path: '/find',
       name: 'find',
       component: find //发现页
+    },
+    {
+      path: '/find/kaka',
+      name: 'kaka',
+      component: kaka //kaka
     },
     {
       path: '/me',

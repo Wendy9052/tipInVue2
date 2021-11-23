@@ -1,6 +1,6 @@
 <template>
   <div class="find_page">
-    <van-cell class="cell_item" is-link >
+    <van-cell class="cell_item" is-link @click="goPage('kaka')">
       <template #title>
         <div class="left_part">
           <div><van-icon size="20" name="flower-o" /></div>
@@ -42,6 +42,14 @@ export default {
   components: {
     Tabbar,
   },
+  methods: {
+    goPage(value) {
+      let path = "/find/" + value
+      this.$router.push({
+        path: path
+      })
+    }
+  }
 }
 </script>
 
