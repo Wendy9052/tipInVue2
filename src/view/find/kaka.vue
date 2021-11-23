@@ -116,10 +116,13 @@ export default {
         .show_btn{
           width: 100px;
           transition: 0.3s;
+          opacity:1;
         }
         .hide_btn {
           width: 0;
           transition: 0.3s;
+          display: 0;
+          opacity:0;
         }
       }
       .avatars_box{
