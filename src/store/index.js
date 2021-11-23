@@ -8,6 +8,7 @@ const store = new Vuex.Store({
   state: {
       count: 0,
       addressList: [],  //地址列表
+      sign: "", //个性签名
   },
   getters: {
     getAddressList(state) {
@@ -18,7 +19,10 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    set_addressList(state, payload) {
+    set_sign(state, payload) {
+      state.sign = payload  //存个性签名
+    },
+    set_addressList(state, payload) { //存储地址列表
       state.addressList = payload
     },
     set_count(state, payload) {
@@ -26,8 +30,11 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    SET_ADDRESS_LIST(context, payload) {
-      context.commit("set_addressList", payload)
+    SET_SIGN(context, payload) {
+      context.commit("set_sign", payload) //存个性签名
+    },
+    SET_ADDRESS_LIST(context, payload) {  
+      context.commit("set_addressList", payload)  //存储地址列表
     },
     SET_COUNT(context, payload) {
       context.commit("set_count", payload)
