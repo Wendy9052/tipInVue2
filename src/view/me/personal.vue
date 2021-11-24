@@ -3,17 +3,19 @@
     <div v-if="ifShowList">
       <van-cell is-link center>
         <template #title>
+          <van-uploader multiple v-model="fileList" :after-read="afterRead" accept="image/*"> 
             <div class="left_box">
-                <div class="text">头像</div>
+              <div class="text">头像</div>
             </div>
+          </van-uploader> 
         </template>
         <template #default>
-          <van-uploader multiple v-model="fileList" :after-read="afterRead" accept="image/*"> 
-            <div class="avatars_box">
-                <img :src="avatars_url" alt="">
+            <div class="avatars_box" @click="onPreview(avatars_url)">
+              <img :src="avatars_url" alt="">
             </div>
-          </van-uploader>    
         </template>
+         
+       
       </van-cell>
       <van-cell-group v-for="(item,index) in featureList" :key="index">
         <van-cell v-for="(item,index) in item.itemList" :key="index" is-link center @click="toFeature(item.url,item.text)">
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import { ImagePreview } from 'vant';
 import { mapState,mapActions } from 'vuex'
 export default {
   components: {
@@ -130,6 +133,19 @@ export default {
   },
   methods: {
     ...mapActions(['SET_NICKNAME']),
+    // 预览头像
+    onPreview(avatars_url) {
+      console.log("avatars_url",avatars_url)
+      let img = []
+      img.push(avatars_url)
+      ImagePreview({img});
+      // console.log("img",img)
+      ImagePreview({
+        images: img,
+        showIndex: false,
+        startPosition: 0,
+      });
+    },
     // 保存昵称
     saveBtn() {
       this.SET_NICKNAME(this.nicknameValue)
