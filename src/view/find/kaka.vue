@@ -105,6 +105,7 @@ export default {
         font-weight: lighter;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .btn_box{
           display: flex;
@@ -116,7 +117,6 @@ export default {
             align-items: center;
             justify-content: space-evenly;
             padding: 5px 0;
-            // width: 100px;
             background: gray;
             color: #fff;
             font-weight: normal;
