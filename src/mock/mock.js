@@ -1,6 +1,27 @@
 import Mock from 'mockjs'
 const Random = Mock.Random;
 
+// 获取动态信息
+function getDaymaticMsg() {
+  let datalist = []
+  for(let i = 0; i < 10; i++) {
+    let newData = {
+      // id|+1: 1,
+      // order: Random.natural(16),
+      "id":Random.increment(),
+      "nickname": Random.cname(), //随机生成中文名字
+      "updateDate": Random.datetime(),//随机生成日期时间
+      "imgageList": Random.image('200x100'), //图片
+      "avatars": Random.image('20x20', '#ccc', '#FFF', 'png'),
+      "content": Random.sentence(), //内容
+    }
+    datalist.push(newData)
+  }
+  return {
+    data: datalist
+  }
+}
+
 
 function getData(){
   let datalist= [];
@@ -48,7 +69,8 @@ function setMsg(){
 
 const data = Mock.mock('/getDataList',getData);
 const data1 = Mock.mock('/setMsg',setMsg)
+const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
 
 export default {
-  data,data1
+  data,data1,get_dynamic_msg
 }

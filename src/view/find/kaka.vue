@@ -8,31 +8,34 @@
     </div>
     <!-- 动态列表 -->
     <div class="dynamic_list">
-      <div class="dynamic_item">
+      <div class="dynamic_item" v-for="(item,index) in dynamicList" :key="item.id">
         <div class="avatars_box">
-          <img :src="avatars_url" alt="">
+          <img :src="item.avatars" alt="">
         </div>
         <div class="right_part">
-          <div class="nickname_text">nickname</div>
+          <div class="nickname_text">{{item.nickname}}</div>
           <div class="content_box">
-            <div class="content_text">世界灿烂盛大，欢迎回家！</div>
+            <div class="content_text">{{item.content}}</div>
             <div v-if="have_img" class="content_img">
               <van-grid :gutter="5" :column-num="2">
-                <van-grid-item icon="photo-o" text="文字" />
-                <van-grid-item icon="photo-o" text="文字" />
-                <van-grid-item icon="photo-o" text="文字" />
-                <van-grid-item icon="photo-o" text="文字" />
+                <van-grid-item>
+                  <template #default>
+                    <div class="">
+                      <img :src="item.imgageList" alt="">
+                    </div>  
+                  </template>
+                </van-grid-item>
               </van-grid>
             </div>
           </div>
           <div class="update_box">
-            <div class="update_text">更新时间</div>
+            <div class="update_text">{{item.updateDate}}</div>
             <div class="btn_box">
-              <div :class="showBtn?'show_btn':'hide_btn'" class="btn">
-                <div v-show="showBtn" class="like_box"><van-icon name="like-o" /><span>  赞</span></div>
-                <div v-show="showBtn"><van-icon name="chat-o" /><span>  评论</span></div>
+              <div :class="(showBtn && (item.id == click_index))?'show_btn':'hide_btn'" class="btn">
+                <div v-show="(showBtn && (item.id == click_index))" class="like_box"><van-icon name="like-o" /><span>  赞</span></div>
+                <div v-show="(showBtn && (item.id == click_index))"><van-icon name="chat-o" /><span>  评论</span></div>
               </div>
-              <div class="icon_box" @click="onShowBtn">
+              <div class="icon_box" @click="onShowBtn(item.id)">
                 <van-icon name="ellipsis" />
               </div>
             </div>
@@ -44,16 +47,31 @@
 </template>
 
 <script>
+import { DynamicMsg } from '@/api/api'
 export default {
   data() {
     return {
       have_img: true, //如果有图片就显示图片
       avatars_url: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4",
       showBtn: false, //if show like and store button
+      dynamicList: [],
+      click_index: null,
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
-    onShowBtn() {
+    async init() {
+      await DynamicMsg().then(res => {
+        this.dynamicList = res.data.data
+        console.log("动态信息",this.dynamicList)
+      }).then(err => {
+        console.log("err",err)
+      })
+    },
+    onShowBtn(id) {
+      this.click_index = id
       this.showBtn = !this.showBtn
     }
   }
@@ -66,6 +84,7 @@ export default {
     padding: 60px 15px;
     .dynamic_item{
       display: flex;
+      margin-bottom: 20px;
       .right_part{
         width: 100%;
       }
@@ -123,11 +142,14 @@ export default {
           transition: 0.3s;
           display: 0;
           opacity:0;
+          background: #fff;
         }
       }
       .avatars_box{
         margin-right: 15px;
         img{
+          width: 30px;
+          height: 30px;
           border-radius: 5px;
         }
       }
