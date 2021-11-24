@@ -32,7 +32,7 @@
             <div class="update_text">{{item.updateDate}}</div>
             <div class="btn_box">
               <div :class="(showBtn && (item.id == click_index))?'show_btn':'hide_btn'" class="btn">
-                <div v-show="(showBtn && (item.id == click_index))" class="like_box"><van-icon name="like-o" /><span>  赞</span></div>
+                <div v-show="(showBtn && (item.id == click_index))"><van-icon name="like-o" /><span>  赞</span></div>
                 <div v-show="(showBtn && (item.id == click_index))"><van-icon name="chat-o" /><span>  评论</span></div>
               </div>
               <div class="icon_box" @click="onShowBtn(item.id)">
@@ -135,6 +135,7 @@ export default {
         .show_btn{
           width: 100px;
           transition: 0.3s;
+          height: 20px;
           opacity:1;
         }
         .hide_btn {
@@ -142,6 +143,7 @@ export default {
           transition: 0.3s;
           display: 0;
           opacity:0;
+          height: 20px;
           background: #fff;
         }
       }
