@@ -1,6 +1,25 @@
 import Mock from 'mockjs'
 const Random = Mock.Random;
 
+// 生成大区(area)、省份(region)
+function getAreaRegion() {
+  let datalist = []
+  for(let i = 0; i < 30; i++) {
+    let newData = {
+      // "area":Random.area(),
+      // "area": Random.area(),
+      "id":Random.increment(),
+      "region": Random.region(),
+      "province": Random.province(),
+      "city": Random.city(),
+    }
+    datalist.push(newData)
+  }
+  return {
+    data: datalist
+  }
+}
+
 // 获取动态信息
 function getDaymaticMsg() {
   let datalist = []
@@ -70,7 +89,11 @@ function setMsg(){
 const data = Mock.mock('/getDataList',getData);
 const data1 = Mock.mock('/setMsg',setMsg)
 const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
+const area_region = Mock.mock('/area_region',getAreaRegion)
 
 export default {
-  data,data1,get_dynamic_msg
+  data,
+  data1,
+  get_dynamic_msg,
+  area_region,
 }

@@ -11,6 +11,11 @@ const store = new Vuex.Store({
       sign: "", //个性签名
       sex: "", //性别
       nickname: "", //昵称
+      area: {
+        region: "",
+        province: "",
+        city:"",
+      }
   },
   getters: {
     getSex(state) {
@@ -24,6 +29,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    set_area(state, payload) {
+      state.area = payload  //存所在地
+    },
     set_nickname(state, payload) {
       state.nickname = payload  //存昵称
     },
@@ -41,6 +49,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_AREA(context, payload) {
+      context.commit("set_area", payload) //存所在地
+    },
     SET_NICKNAME(context, payload) {
       context.commit("set_nickname", payload) //存昵称
     },

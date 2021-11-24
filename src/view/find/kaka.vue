@@ -8,7 +8,7 @@
     </div>
     <!-- 动态列表 -->
     <div class="dynamic_list">
-      <div class="dynamic_item" v-for="(item,index) in dynamicList" :key="item.id">
+      <div class="dynamic_item" v-for="(item) in dynamicList" :key="item.id">
         <div class="avatars_box">
           <img :src="item.avatars" alt="">
         </div>
