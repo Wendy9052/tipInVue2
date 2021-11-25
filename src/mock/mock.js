@@ -1,5 +1,20 @@
 import Mock from 'mockjs'
+import store from '../store';
 const Random = Mock.Random;
+
+// 生成消息
+function createMsg() {
+  let datalist = []
+  let newData = {
+    "type": "other",
+    "avatars_url": store.state.avatarsUrl,
+    "msg": Random.title(5),
+  }
+  datalist.push(newData)
+  return {
+    data: datalist
+  }
+}
 
 // 生成联系人列表
 function relationList() {
@@ -105,11 +120,13 @@ const data1 = Mock.mock('/setMsg',setMsg)
 const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
 const area_region = Mock.mock('/area_region',getAreaRegion)
 const relation_list = Mock.mock('/relation_list',relationList)
+const create_msg = Mock.mock('/create_msg', createMsg)
 
 export default {
   data,
   data1,
   get_dynamic_msg,
   area_region,
-  relation_list
+  relation_list,
+  create_msg
 }

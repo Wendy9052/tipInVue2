@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+// 生成消息
+export function createMsg(data) {
+  return axios.get('/create_msg',data)
+}
+
 // 获取联系人列表
 export function relationList(data) {
   return axios.get('/relation_list',data)

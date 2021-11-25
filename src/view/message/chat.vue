@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { mapState,mapActions } from "vuex"
+import { createMsg } from "@/api/api"
 export default {
   data() {
     return {
@@ -76,11 +78,15 @@ export default {
       ],
     }
   },
+  computed: {
+    ...mapState(['avatarsUrl'])
+  },
   mounted() { 
     this.other_avatars_url = this.$route.query.avatars
     this.init()
   },
   methods: {
+    ...mapActions(['SET_AVATARS_URL']),
     // 初始化对话列表
     init() {
       this.relation_name = this.$route.query.name //标题栏
@@ -93,6 +99,7 @@ export default {
           this.dialogList[i].avatars_url = this.my_avatars_url
         }
       }
+      this.SET_AVATARS_URL(this.other_avatars_url)
       console.log("duihualiebioa",this.dialogList)
     },
     // 点击发送
@@ -104,6 +111,14 @@ export default {
       }
       this.dialogList.push(dialog_data)
       this.iptValue = ""
+      this.SET_AVATARS_URL(this.other_avatars_url)
+      console.log("头像:",this.avatarsUrl)
+      setTimeout(() => {
+        createMsg().then(res => {
+          console.log("生成消息",res)
+          this.dialogList.push(res.data.data[0])
+        })
+      },1000)
     },
     // 点击返回
     onClickLeft() {

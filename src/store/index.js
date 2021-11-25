@@ -15,7 +15,8 @@ const store = new Vuex.Store({
         region: "",
         province: "",
         city:"",
-      }
+      },
+      avatarsUrl: "", //头像
   },
   getters: {
     getSex(state) {
@@ -29,6 +30,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    set_avatars(state, payload) {
+      state.avatarsUrl = payload //存头像
+    },
     set_area(state, payload) {
       state.area = payload  //存所在地
     },
@@ -49,6 +53,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_AVATARS_URL(context, payload) {
+      context.commit("set_avatars", payload) //存头像
+    },
     SET_AREA(context, payload) {
       context.commit("set_area", payload) //存所在地
     },
