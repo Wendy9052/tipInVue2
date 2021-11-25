@@ -21,11 +21,31 @@
             {{short_msg}}
           </div>
         </div>
+      </div>
+      <div class="my_box">
+        <div class="dialog_box">
+          <div class="msg_box">
+            <div class="triangle_icon"></div>
+            {{iptValue}}
+          </div>
+        </div>
+        <div class="avatars_box">
+          <img :src="my_avatars_url" alt="">
+        </div>
       </div>  
     </div>
     <div class="ipt_box">
       <van-cell-group>
-        <van-field v-model="value" label="文本" placeholder="请输入用户名" />
+        <van-field v-model="iptValue" placeholder="">
+          <template #input class="label_box" width="30px">
+            <div class="icon_box">
+              <van-icon color="#a5a5a5" name="volume-o" />
+            </div>
+          </template>
+          <template #button>
+            <van-button size="small" type="primary" @click="sendMsg()">发送</van-button>
+          </template>
+        </van-field>
       </van-cell-group>
     </div>
   </div>
@@ -35,9 +55,11 @@
 export default {
   data() {
     return {
-      relation_name: "",
-      avatars_url: "",
-      short_msg: "",
+      relation_name: "",  //对方昵称
+      avatars_url: "",  //对方头像地址
+      my_avatars_url: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4", //我的头像地址
+      short_msg: "",  //对方的当前消息
+      iptValue: "呵呵哈哈哈", //发送的消息
     }
   },
   mounted() { 
@@ -46,8 +68,15 @@ export default {
     this.short_msg = this.$route.query.short_msg
   },
   methods: {
+    // 点击发送
+    sendMsg() {
+      
+    },
+    // 点击返回
     onClickLeft() {
-
+      this.$router.replace({
+        name:"message"
+      })
     },
     onClickRight() {
 
@@ -65,11 +94,61 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100vw;
+    .label_box{
+      background: #000;
+    }
+    .icon_box{
+      border: 1px solid #a5a5a5;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .dialog_part {
     padding: 15px;
+    .my_box{
+      display: flex;
+      margin-bottom: 15px;
+      justify-content: end;
+      // text-align: right;
+      // width: 50vw;
+      .dialog_box {
+        background: #fff;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 10px;
+        .msg_box {
+          font-size: 14px;
+          color: #0f0f0f;
+          position: relative;
+          max-width: 50vw;
+          .triangle_icon {
+            width:0;
+            height:0;
+            border:5px solid;
+            border-color:transparent transparent #fff #fff ;
+            transform: rotate(-135deg);
+            position: absolute;
+            right: -14px;
+            top: 3px;
+          }
+        }
+      }
+      .avatars_box {
+        display: flex;
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 5px;
+        }
+      }
+    }
     .relation_box {
       display: flex;
+      margin-bottom: 15px;
       .dialog_box {
         background: #fff;
         border-radius: 5px;
@@ -78,6 +157,7 @@ export default {
           font-size: 14px;
           color: #0f0f0f;
           position: relative;
+          max-width: 50vw;
           .triangle_icon {
             width:0;
             height:0;
