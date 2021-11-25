@@ -1,13 +1,29 @@
 import Mock from 'mockjs'
 const Random = Mock.Random;
 
-// 生成大区(area)、省份(region)
+// 生成联系人列表
+function relationList() {
+  let datalist = []
+  for(let i = 0; i < 20; i++) {
+    let newData = {
+      "id": Random.increment(),
+      "name": Random.name(),
+      "avatars": Random.dataImage('20x20', "Q"),
+      "update_date": Random.date("yyyy-MM-dd"),
+      "short_msg": Random.title(5),
+    }
+    datalist.push(newData)
+  }
+  return {
+    data: datalist
+  }
+}
+
+// 生成大区(area)、省份(region)、城市(city)
 function getAreaRegion() {
   let datalist = []
   for(let i = 0; i < 30; i++) {
     let newData = {
-      // "area":Random.area(),
-      // "area": Random.area(),
       "id":Random.increment(),
       "region": Random.region(),
       "province": Random.province(),
@@ -25,8 +41,6 @@ function getDaymaticMsg() {
   let datalist = []
   for(let i = 0; i < 10; i++) {
     let newData = {
-      // id|+1: 1,
-      // order: Random.natural(16),
       "id":Random.increment(),
       "nickname": Random.cname(), //随机生成中文名字
       "updateDate": Random.datetime(),//随机生成日期时间
@@ -90,10 +104,12 @@ const data = Mock.mock('/getDataList',getData);
 const data1 = Mock.mock('/setMsg',setMsg)
 const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
 const area_region = Mock.mock('/area_region',getAreaRegion)
+const relation_list = Mock.mock('/relation_list',relationList)
 
 export default {
   data,
   data1,
   get_dynamic_msg,
   area_region,
+  relation_list
 }

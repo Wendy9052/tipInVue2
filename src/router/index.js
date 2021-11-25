@@ -21,7 +21,7 @@ import my_address from '@/view/me/my_address.vue'
 
 
 import chat from '@/view/message/chat.vue'
-import chatDetail from '@/view/message/chatDetail.vue'
+// import chatDetail from '@/view/message/chatDetail.vue'
 
 
 
@@ -39,11 +39,11 @@ export default new Router({
       name: 'chat',
       component: chat 
     },
-    {
-      path: '/message/chatDetail',
-      name: 'chatDetail',
-      component: chatDetail
-    },
+    // {
+    //   path: '/message/chatDetail',
+    //   name: 'chatDetail',
+    //   component: chatDetail
+    // },
     {
       path: '/address_list',
       name: 'addressList',

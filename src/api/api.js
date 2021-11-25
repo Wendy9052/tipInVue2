@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+// 获取联系人列表
+export function relationList(data) {
+  return axios.get('/relation_list',data)
+}
+
 // 获取大区列表
 export function getArea(data) {
   return axios.get('/area_region',data)
