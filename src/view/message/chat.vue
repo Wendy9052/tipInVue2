@@ -8,7 +8,9 @@
       class="nav_bar"
     >
       <template #right>
-        <van-icon name="ellipsis" />
+        <div @click="onMore()">
+          <van-icon name="ellipsis" />
+        </div>
       </template>
     </van-nav-bar>
     <div class="dialog_part" v-for="(item,index) in dialogList" :key="index">
@@ -87,6 +89,12 @@ export default {
   },
   methods: {
     ...mapActions(['SET_AVATARS_URL']),
+    // 查看更多
+    onMore() {
+      this.$router.push({
+        name:"chatMsg"
+      })
+    },
     // 初始化对话列表
     init() {
       this.relation_name = this.$route.query.name //标题栏
