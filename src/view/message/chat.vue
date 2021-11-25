@@ -5,42 +5,44 @@
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
+      class="nav_bar"
     >
       <template #right>
         <van-icon name="ellipsis" />
       </template>
     </van-nav-bar>
-    <div class="dialog_part">
-      <div class="relation_box">
+    <div class="dialog_part" v-for="(item,index) in dialogList" :key="index">
+      <div class="relation_box" v-if="item.type == 'other'">
         <div class="avatars_box">
-          <img :src="avatars_url" alt="">
+          <img :src="item.avatars_url" alt="">
         </div>
         <div class="dialog_box">
           <div class="msg_box">
             <div class="triangle_icon"></div>
-            {{short_msg}}
+            {{item.msg}}
           </div>
         </div>
       </div>
-      <div class="my_box">
+      <div class="my_box" v-if="item.type == 'mine'">
         <div class="dialog_box">
           <div class="msg_box">
             <div class="triangle_icon"></div>
-            {{iptValue}}
+            {{item.msg}}
           </div>
         </div>
         <div class="avatars_box">
-          <img :src="my_avatars_url" alt="">
+          <img :src="item.avatars_url" alt="">
         </div>
       </div>  
     </div>
     <div class="ipt_box">
       <van-cell-group>
-        <van-field v-model="iptValue" placeholder="">
-          <template #input class="label_box" width="30px">
+        <van-field  placeholder="">
+          <template #input width="30px">
             <div class="icon_box">
               <van-icon color="#a5a5a5" name="volume-o" />
             </div>
+            <input class="ipt_style" type="text" v-model="iptValue">
           </template>
           <template #button>
             <van-button size="small" type="primary" @click="sendMsg()">发送</van-button>
@@ -56,21 +58,52 @@ export default {
   data() {
     return {
       relation_name: "",  //对方昵称
-      avatars_url: "",  //对方头像地址
+      other_avatars_url: "",  //对方头像地址
       my_avatars_url: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4", //我的头像地址
       short_msg: "",  //对方的当前消息
-      iptValue: "呵呵哈哈哈", //发送的消息
+      iptValue: "", //发送的消息
+      dialogList: [
+        {
+          type: "other",
+          avatars_url: "",
+          msg: "",
+        },
+        {
+          type: "mine",
+          avatars_url: "",
+          msg: "呵呵哈哈哈",
+        }
+      ],
     }
   },
   mounted() { 
-    this.relation_name = this.$route.query.name
-    this.avatars_url = this.$route.query.avatars
-    this.short_msg = this.$route.query.short_msg
+    this.other_avatars_url = this.$route.query.avatars
+    this.init()
   },
   methods: {
+    // 初始化对话列表
+    init() {
+      this.relation_name = this.$route.query.name //标题栏
+      this.dialogList[0].msg = this.$route.query.short_msg 
+      for(let i in this.dialogList) {
+        if(this.dialogList[i].type == "other") {
+          this.dialogList[i].avatars_url = this.other_avatars_url
+        }
+        if(this.dialogList[i].type == "mine") {
+          this.dialogList[i].avatars_url = this.my_avatars_url
+        }
+      }
+      console.log("duihualiebioa",this.dialogList)
+    },
     // 点击发送
     sendMsg() {
-      
+      let dialog_data = {
+        type: "mine",
+        avatars_url: this.my_avatars_url,
+        msg: this.iptValue,
+      }
+      this.dialogList.push(dialog_data)
+      this.iptValue = ""
     },
     // 点击返回
     onClickLeft() {
@@ -90,13 +123,13 @@ export default {
   background: rgba(204,204,204,0.3);
   height: 100vh;
   position: relative;
+  .nav_bar{
+    margin-bottom: 8px;
+  }
   .ipt_box{
     position: fixed;
     bottom: 0;
     width: 100vw;
-    .label_box{
-      background: #000;
-    }
     .icon_box{
       border: 1px solid #a5a5a5;
       width: 20px;
@@ -105,16 +138,23 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-right: 15px;
     }
+    .ipt_style{
+      background: rgba(204,204,204,0.2);
+      border: none;
+      outline: none;
+      width: 60vw;
+      border-radius: 5px;
+      text-indent: 10px;
+    }
+    
   }
   .dialog_part {
-    padding: 15px;
+    padding: 8px;
     .my_box{
       display: flex;
-      margin-bottom: 15px;
       justify-content: end;
-      // text-align: right;
-      // width: 50vw;
       .dialog_box {
         background: #fff;
         border-radius: 5px;
@@ -148,7 +188,7 @@ export default {
     }
     .relation_box {
       display: flex;
-      margin-bottom: 15px;
+      // margin-bottom: 15px;
       .dialog_box {
         background: #fff;
         border-radius: 5px;
