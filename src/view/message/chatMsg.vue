@@ -105,20 +105,10 @@
       </div>
       <div :class="showBgList?'right_part':'right_to_left'">
         <div v-show="showPicture" class="bg_choose_page" >
-          <van-row gutter="20">
-            <van-col span="8">
+          <van-row type="flex" justify="space-around">
+            <van-col span="7" v-for="(item, index) in picture_list" :key="index">
               <div class="img_box">
-                <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F19%2F20160119200135_dXcvF.thumb.700_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640513154&t=c4a5fbec77eb7de10e2591148686ac58" alt="">
-              </div>
-            </van-col>
-            <van-col span="8">
-              <div class="img_box">
-                <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F19%2F20160119200135_dXcvF.thumb.700_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640513154&t=c4a5fbec77eb7de10e2591148686ac58" alt="">
-              </div>
-            </van-col>
-            <van-col span="8">
-              <div class="img_box">
-                <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F19%2F20160119200135_dXcvF.thumb.700_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640513154&t=c4a5fbec77eb7de10e2591148686ac58" alt="">
+                <img :src="item.img_url" alt="">
               </div>
             </van-col>
           </van-row>
@@ -142,6 +132,20 @@ export default {
       showList: true, //显示列表
       showBgList: true, //显示背景选择列表
       showPicture: false, // 显示背景图
+      picture_list: [
+        {
+          img_url:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201601%2F19%2F20160119200135_dXcvF.thumb.700_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640513154&t=c4a5fbec77eb7de10e2591148686ac58"
+        },
+        {
+          img_url:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201909%2F15%2F20190915112038_twmnf.thumb.700_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640514908&t=14e903623c40f3e35e5fa26d1548d61c"
+        },
+        {
+          img_url:"https://img1.baidu.com/it/u=160649478,1850475727&fm=26&fmt=auto"
+        },
+        {
+          img_url:"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201807%2F13%2F20180713191532_oyhgm.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1640514954&t=545d9f85f09d08cb75cb73b3b773a530"
+        }
+      ]
     }
   },
   computed: {
@@ -173,15 +177,20 @@ export default {
     height: 100vh;
     background: rgba(17, 20, 2, 0.8);
     padding-top: 5px;
+    // display: flex;
+    // justify-content: center;
     .img_box{
       // background: #ccc;
       border-radius: 5px;
       width: 100%;
       padding-top: 100%;
       position: relative;
+      margin-bottom: 5px;
       img{
         border-radius: 5px;
         position: absolute;
+        left: 0;
+        top: 0;
         width:100%;
         height: 100%;
         // padding:33% 0 0;
