@@ -1,6 +1,15 @@
 <template>
   <div class="chat_msg">
     <van-cell-group>
+      <van-cell center>
+        <template #title>
+            <div class="left_box">
+              <img class="avatars_class" :src="avatarsUrl" alt="">
+            </div>
+        </template>
+      </van-cell>
+    </van-cell-group>
+    <van-cell-group>
       <van-cell is-link>
         <template #title>
             <div class="left_box">
@@ -72,6 +81,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 export default {
   data() {
     return {
@@ -81,6 +91,9 @@ export default {
       activeColor: "#27ae66",
       inactiveColor: "#ccc",
     }
+  },
+  computed: {
+    ...mapState(['avatarsUrl'])
   }
 }
 </script>
@@ -91,6 +104,10 @@ export default {
   background: rgba(204,204,204,0.3);
   .van-cell-group{
     margin-bottom: 8px;
+  }
+  .avatars_class{
+    width: 45px;
+    border-radius: 5px;
   }
 }
 </style>
