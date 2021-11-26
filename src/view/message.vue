@@ -73,6 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .home_page{
+  padding-bottom: 50px;
   .tabbar{
     position: fixed;
     bottom: 0;
