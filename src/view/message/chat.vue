@@ -1,5 +1,5 @@
 <template>
-  <div class="chat_page">
+  <div class="chat_page" :style="'background:url(' + bg_img_url + ')'">
     <van-nav-bar
       :title="relation_name"
       left-arrow
@@ -81,9 +81,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['avatarsUrl'])
+    ...mapState(['avatarsUrl','bg_img_url'])
   },
   mounted() { 
+    console.log("bg_img_url",this.bg_img_url)
     this.other_avatars_url = this.$route.query.avatars
     this.init()
   },

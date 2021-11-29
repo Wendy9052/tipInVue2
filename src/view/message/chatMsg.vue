@@ -1,5 +1,5 @@
 <template>
-  <div class="chat_msg">
+  <div class="chat_msg" >
     <div v-if="showList">
       <van-cell-group>
         <van-cell center>
@@ -107,7 +107,7 @@
         <div v-show="showPicture" class="bg_choose_page" >
           <van-row type="flex" justify="space-around">
             <van-col span="7" v-for="(item, index) in picture_list" :key="index">
-              <div class="img_box">
+              <div class="img_box" @click="changeBg(item.img_url)">
                 <img :src="item.img_url" alt="">
               </div>
             </van-col>
@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState,mapActions } from "vuex"
 export default {
   data() {
     return {
@@ -152,6 +152,14 @@ export default {
     ...mapState(['avatarsUrl'])
   },
   methods: {
+    ...mapActions(['SET_BG']),
+    // 更换背景
+    changeBg(img_url) {
+      this.SET_BG(img_url)
+      this.$router.replace({
+        name:"chat",
+      })
+    },
     // 选择背景
     chooseBg() {
       this.showBgList = false

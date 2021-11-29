@@ -17,6 +17,7 @@ const store = new Vuex.Store({
         city:"",
       },
       avatarsUrl: "", //头像
+      bg_img_url: "", //背景图
   },
   getters: {
     getSex(state) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    set_bg(state, payload) {
+      state.bg_img_url = payload  //存背景图
+    },
     set_avatars(state, payload) {
       state.avatarsUrl = payload //存头像
     },
@@ -53,6 +57,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_BG(context, payload) {  //存背景图地址
+      context.commit("set_bg", payload)
+    },
     SET_AVATARS_URL(context, payload) {
       context.commit("set_avatars", payload) //存头像
     },
@@ -76,7 +83,7 @@ const store = new Vuex.Store({
     }
   },
   plugins: [persistedState({
-    storage:window.sessionStorage
+    storage:window.localStorage
   })]
 })
 
