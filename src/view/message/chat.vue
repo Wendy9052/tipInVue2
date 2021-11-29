@@ -47,20 +47,50 @@
             <input class="ipt_style" type="text" v-model="iptValue">
           </template>
           <template #button>
-            <van-button size="small" type="primary" @click="sendMsg()">发送</van-button>
+            <div class="button_box">
+              <div class="emotion_btn" @click="chooseEmotion()">
+                <van-icon size="30" name="smile-o" />
+              </div>
+              <div>
+                <van-button size="small" type="primary" @click="sendMsg()">发送</van-button>
+              </div>
+            </div>
           </template>
         </van-field>
+        <div v-show="isShowEmotion">
+          <div :class="isShowEmotion ? 'has_height' : 'none_height'">
+            <div class="container" >
+              <!-- <p>文本输入框</p> -->
+              <!-- <textarea class="text" rows="5" v-model="content" ></textarea> -->
+              <!-- <p>表情选择框</p> -->
+              <emotion @emotion="handleEmotion" :height="200" ></emotion>
+              <!-- <p>效果显示框</p> -->
+              <!-- <div class="text-place"> -->
+                <!-- /\#[\u4E00-\u9FA5]{1,3}\;/gi 匹配出含 #XXX; 的字段 -->
+                <!-- <p v-html="content.replace(/\#[\u4E00-\u9FA5]{1,3}\;/gi, emotion)"></p> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
       </van-cell-group>
     </div>
   </div>
 </template>
 
 <script>
+import Emotion from '@/components/index'
+// import Emotion from '@/components/Emotion'
 import { mapState,mapActions } from "vuex"
 import { createMsg } from "@/api/api"
 export default {
+  components: {
+    Emotion
+  },
   data() {
     return {
+      content: '',
+      comment: '',
+      isShowEmotion: false, //是否显示表情
       relation_name: "",  //对方昵称
       other_avatars_url: "",  //对方头像地址
       my_avatars_url: "https://avatars.githubusercontent.com/u/71574611?s=40&v=4", //我的头像地址
@@ -90,6 +120,21 @@ export default {
   },
   methods: {
     ...mapActions(['SET_AVATARS_URL']),
+    handleEmotion (i) {
+      this.content += i
+    },
+    // 将匹配结果替换表情图片
+    emotion (res) {
+      let word = res.replace(/\#|\;/gi,'')
+      const list = ['微笑', '撇嘴', '色', '发呆', '得意', '流泪', '害羞', '闭嘴', '睡', '大哭', '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱', '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘', '晕', '折磨', '衰', '骷髅', '敲打', '再见', '擦汗', '抠鼻', '鼓掌', '糗大了', '坏笑', '左哼哼', '右哼哼', '哈欠', '鄙视', '委屈', '快哭了', '阴险', '亲亲', '吓', '可怜', '菜刀', '西瓜', '啤酒', '篮球', '乒乓', '咖啡', '饭', '猪头', '玫瑰', '凋谢', '示爱', '爱心', '心碎', '蛋糕', '闪电', '炸弹', '刀', '足球', '瓢虫', '便便', '月亮', '太阳', '礼物', '拥抱', '强', '弱', '握手', '胜利', '抱拳', '勾引', '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手', '激动', '街舞', '献吻', '左太极', '右太极']
+      let index = list.indexOf(word)
+      return `<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif" align="middle">`   
+      // return `https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif`  
+    },
+    // 选择发送表情
+    chooseEmotion() {
+      this.isShowEmotion = !this.isShowEmotion
+    },
     // 查看更多
     onMore() {
       this.$router.push({
@@ -147,6 +192,37 @@ export default {
   background: rgba(204,204,204,0.3);
   height: 100vh;
   position: relative;
+
+  .container {
+    margin: 0 auto;
+    // margin-top: 20px;
+    // width: 400px;
+
+    .text {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      width: 400px;
+      resize: none;
+      box-sizing: border-box;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    .text-place {
+      height: 80px;
+      box-sizing: border-box;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: #ddd5d5;
+    }
+    .text-place p {
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+
+  }
+  
   .nav_bar{
     margin-bottom: 8px;
   }
@@ -154,6 +230,26 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100vw;
+    .emotion-box-line{
+      .emotion-item{
+        margin: 5px;
+      }
+    }
+    .none_height{
+      height: 0;
+      transition: 0.6s;
+    }
+    .has_height{
+      height: auto;
+      transition: 0.6s;
+    }
+    .button_box{
+      display: flex;
+      justify-content: space-between;
+      .emotion_btn{
+        margin-right: 5px;
+      }
+    }
     .icon_box{
       border: 1px solid #a5a5a5;
       width: 20px;
