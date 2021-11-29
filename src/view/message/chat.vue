@@ -1,5 +1,5 @@
 <template>
-  <div class="chat_page" :style="'background:url(' + bg_img_url + ')'">
+  <div class="chat_page" >
     <van-nav-bar
       :title="relation_name"
       left-arrow
@@ -13,30 +13,33 @@
         </div>
       </template>
     </van-nav-bar>
-    <div class="dialog_part" v-for="(item,index) in dialogList" :key="index">
-      <div class="relation_box" v-if="item.type == 'other'">
-        <div class="avatars_box">
-          <img :src="item.avatars_url" alt="">
-        </div>
-        <div class="dialog_box">
-          <div class="msg_box">
-            <div class="triangle_icon"></div>
-            {{item.msg}}
+    <div class="dialog_part_outer" :style="'background:url(' + bg_img_url + ')'">
+      <div class="dialog_part" v-for="(item,index) in dialogList" :key="index" >
+        <div class="relation_box" v-if="item.type == 'other'">
+          <div class="avatars_box">
+            <img :src="item.avatars_url" alt="">
+          </div>
+          <div class="dialog_box">
+            <div class="msg_box">
+              <div class="triangle_icon"></div>
+              {{item.msg}}
+            </div>
           </div>
         </div>
+        <div class="my_box" v-if="item.type == 'mine'">
+          <div class="dialog_box">
+            <div class="msg_box">
+              <div class="triangle_icon"></div>
+              {{item.msg}}
+            </div>
+          </div>
+          <div class="avatars_box">
+            <img :src="item.avatars_url" alt="">
+          </div>
+        </div>  
       </div>
-      <div class="my_box" v-if="item.type == 'mine'">
-        <div class="dialog_box">
-          <div class="msg_box">
-            <div class="triangle_icon"></div>
-            {{item.msg}}
-          </div>
-        </div>
-        <div class="avatars_box">
-          <img :src="item.avatars_url" alt="">
-        </div>
-      </div>  
     </div>
+    
     <div class="ipt_box">
       <van-cell-group>
         <van-field  placeholder="">
@@ -44,7 +47,7 @@
             <div class="icon_box">
               <van-icon color="#a5a5a5" name="volume-o" />
             </div>
-            <input class="ipt_style" type="text" v-model="iptValue">
+            <textarea class="ipt_style" type="text" v-model="iptValue"></textarea>
           </template>
           <template #button>
             <div class="button_box">
@@ -65,10 +68,10 @@
               <!-- <p>表情选择框</p> -->
               <emotion @emotion="handleEmotion" :height="200" ></emotion>
               <!-- <p>效果显示框</p> -->
-              <!-- <div class="text-place"> -->
+              <div class="text-place">
                 <!-- /\#[\u4E00-\u9FA5]{1,3}\;/gi 匹配出含 #XXX; 的字段 -->
-                <!-- <p v-html="content.replace(/\#[\u4E00-\u9FA5]{1,3}\;/gi, emotion)"></p> -->
-              <!-- </div> -->
+                <p v-html="content.replace(/\#[\u4E00-\u9FA5]{1,3}\;/gi, emotion)"></p>
+              </div>
             </div>
           </div>
         </div>
@@ -223,9 +226,6 @@ export default {
 
   }
   
-  .nav_bar{
-    margin-bottom: 8px;
-  }
   .ipt_box{
     position: fixed;
     bottom: 0;
@@ -267,11 +267,17 @@ export default {
       width: 60vw;
       border-radius: 5px;
       text-indent: 10px;
+      height: 30px;
     }
     
   }
+  .dialog_part_outer{
+    height: 100%;
+  }
   .dialog_part {
     padding: 8px;
+    // padding-top: 0;
+    // margin-bottom: 54px;
     .my_box{
       display: flex;
       justify-content: end;
