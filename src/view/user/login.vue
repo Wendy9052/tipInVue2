@@ -4,14 +4,15 @@
     <div class="login_box">
       <div class="title">咖咖账号{{btn_text}}</div>
       <div class="ipt_box">
-        <input type="text" name="" placeholder="邮箱/手机号" v-model="username" @blur="checkPhoneOrEmail()" id="">
+        <input type="text" name="" placeholder="邮箱/手机号" v-model.trim="username" @blur="checkPhoneOrEmail()" id="">
         <div class="err_text" v-if="emailIsError">{{email_error_tip}}</div>
       </div>
       <div class="ipt_box">
-        <input type="password" name="" placeholder="密码" v-model="password" id="">
+        <input type="password" name="" placeholder="密码" v-model.trim="password" @blur="checkPswLength()" id="">
+        <div class="err_text" v-if="pswIsError">密码长度不能小于6位</div>
       </div>
       <div class="ipt_box" v-if="ifShowRePsw">
-        <input type="password" name="" placeholder="确认密码" v-model="re_password" @blur="checkPsw()" id="">
+        <input type="password" name="" placeholder="确认密码" v-model.trim="re_password" @blur="checkPsw()" id="">
         <div class="err_text" v-if="isError">两次输入的密码不一致</div>
       </div>
       <div class="agree_box">
@@ -49,6 +50,7 @@ export default {
       isError: false,
       emailIsError: false,  //邮箱格式是否有误
       email_error_tip: "邮箱格式有误",
+      pswIsError: false,
     }
   },
   methods: {
@@ -106,6 +108,17 @@ export default {
         this.emailIsError = false
       }
       
+    },
+    // 判断密码长度是否小于6位
+    checkPswLength() {
+      console.log(this.password.length)
+      if(this.ifShowRePsw) {
+        if(this.password.length < 6) {
+          this.pswIsError = true
+        }else {
+          this.pswIsError = false
+        }
+      }
     },
     // 检验两次输入的密码是否相同
     checkPsw() {
@@ -175,7 +188,7 @@ export default {
       font-size: 14px;
       color: gray;
       text-align: center;
-      margin-top: 25%;
+      margin-top: 15%;
       margin-bottom: 40px;
     }
     .agree_box{
