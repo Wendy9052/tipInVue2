@@ -18,11 +18,10 @@ import qr_card from '@/view/me/qr_card.vue'
 import more_msg from '@/view/me/more_msg.vue'
 import my_address from '@/view/me/my_address.vue'
 
-
-
 import chat from '@/view/message/chat.vue'
 import chatMsg from '@/view/message/chatMsg.vue'
 
+import login from '@/view/user/login.vue'
 
 
 Vue.use(Router)
@@ -33,6 +32,11 @@ export default new Router({
       path: '/',  
       name: 'message',  
       component: message  //聊天列表
+    },
+    {
+      path: '/user/login',  
+      name: 'login',  
+      component: login  //聊天列表
     },
     {
       path: '/message/chat',
