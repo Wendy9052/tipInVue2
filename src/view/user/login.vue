@@ -32,10 +32,6 @@
         </div>
       </div>
     </div>
-    <!-- register -->
-    <div class="register_box">
-
-    </div>
   </div>
 </template>
 
@@ -60,7 +56,7 @@ export default {
     onClickButton() {
       console.log("checkde",this.checked)
       if(this.ifShowRePsw) {
-      // 注册
+        // 注册
         if(!this.username) {
           Toast("邮箱或手机号不能为空")
         }else if(!this.password) {
@@ -71,8 +67,12 @@ export default {
           Toast("勾选同意协议后才能注册")
         }
       }else {  
-      // 登录
-        if(this.checked == false) {
+        // 登录
+        if(!this.username) {
+          Toast("邮箱或手机号不能为空")
+        }else if(!this.password) {
+          Toast("密码不能为空")
+        }else if(this.checked == false) {
           Toast("勾选同意协议后才能登录")
         }
       }
