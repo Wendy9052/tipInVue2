@@ -29,7 +29,6 @@
           <div class="icon_bg"><van-icon size="25" name="wechat" /></div>
           <div class="icon_bg"><van-icon size="25" name="diamond" /></div>
         </div>
-        
       </div>
     </div>
     <!-- register -->
