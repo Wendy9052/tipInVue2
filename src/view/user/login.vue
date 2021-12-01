@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { Login } from "@/api/api"
 import { Toast } from "vant"
 export default {
   data() {
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     // 点击登录/注册
-    onClickButton() {
+    async onClickButton() {
       console.log("checkde",this.checked)
       if(this.ifShowRePsw) {
         // 注册
@@ -70,13 +71,27 @@ export default {
         }
       }else {  
         // 登录
-        if(!this.username) {
-          Toast("邮箱或手机号不能为空")
-        }else if(!this.password) {
-          Toast("密码不能为空")
-        }else if(this.checked == false) {
-          Toast("勾选同意协议后才能登录")
+        // if(!this.username) {
+        //   Toast("邮箱或手机号不能为空")
+        // }else if(!this.password) {
+        //   Toast("密码不能为空")
+        // }else if(this.checked == false) {
+        //   Toast("勾选同意协议后才能登录")
+        // }
+        let params = {
+          username: this.username,
+          password: this.password
         }
+        // await Login({ params:params }).then(res => {
+        //   console.log("res",res)
+        // })
+        // await Login(params).then(res => {
+        //   console.log("res",res)
+        // })
+
+        this.$http.get("/check_login",params).then(res=>{
+          console.log("login_res",res)
+        })
       }
     },
     // 校验邮箱/手机号
@@ -85,28 +100,28 @@ export default {
       let phone_test = /^1[0-9]{10}$/
       let flag = false
       console.log("邮箱校验",email_test.test(this.username))
-      if( this.username != '') {
-        if(!phone_test.test(this.username) && !flag){
-          this.email_error_tip = "请输入正确的手机号"
-          flag = false
-        }else {
-          this.email_error_tip = ""
-          flag = true
-        }
-        if(!flag) {
-          if(!email_test.test(this.username)) {
-            this.email_error_tip = "请输入正确的邮箱"
-            flag = false
-          }else {
-            this.email_error_tip = ""
-            flag = true
-          }
-        }
-        this.emailIsError = true
-      }else {
-        this.email_error_tip = ""
-        this.emailIsError = false
-      }
+      // if( this.username != '') {
+      //   if(!phone_test.test(this.username) && !flag){
+      //     this.email_error_tip = "请输入正确的手机号"
+      //     flag = false
+      //   }else {
+      //     this.email_error_tip = ""
+      //     flag = true
+      //   }
+      //   if(!flag) {
+      //     if(!email_test.test(this.username)) {
+      //       this.email_error_tip = "请输入正确的邮箱"
+      //       flag = false
+      //     }else {
+      //       this.email_error_tip = ""
+      //       flag = true
+      //     }
+      //   }
+      //   this.emailIsError = true
+      // }else {
+      //   this.email_error_tip = ""
+      //   this.emailIsError = false
+      // }
       
     },
     // 判断密码长度是否小于6位

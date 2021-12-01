@@ -2,6 +2,43 @@ import Mock from 'mockjs'
 import store from '../store';
 const Random = Mock.Random;
 
+// 校验login
+function checkLogin(params) {
+  if(params.username == 'admin' && params.password == '123456') {
+    console.log("校验成功")
+    let datalist = [
+      {
+        msg: "success"
+      }
+    ]
+    return {data: datalist}
+  }else {
+    let datalist = [
+      {
+        msg: "fail",
+        data: params
+      }
+    ]
+    return {data: datalist}
+  }
+    // let datalist = [
+    //   params
+    // ]
+    // return {data:datalist}
+
+  // let datalist = []
+  // let newData = {
+  //   "type": "other",
+  //   "avatars_url": store.state.avatarsUrl,
+  //   "msg": Random.title(5),
+  // }
+  // datalist.push(newData)
+    // return {
+    //   data: datalist
+    // }
+  
+}
+
 // 生成消息
 function createMsg() {
   let datalist = []
@@ -121,6 +158,7 @@ const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
 const area_region = Mock.mock('/area_region',getAreaRegion)
 const relation_list = Mock.mock('/relation_list',relationList)
 const create_msg = Mock.mock('/create_msg', createMsg)
+const check_login = Mock.mock('/check_login',checkLogin)
 
 export default {
   data,
@@ -128,5 +166,6 @@ export default {
   get_dynamic_msg,
   area_region,
   relation_list,
-  create_msg
+  create_msg,
+  check_login
 }

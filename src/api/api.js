@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+// 登录
+export function Login(data) {
+  return axios.get('/check_login',data)
+}
+
 // 生成消息
 export function createMsg(data) {
   return axios.get('/create_msg',data)
