@@ -3,41 +3,26 @@ import store from '../store';
 const Random = Mock.Random;
 
 // 校验login
-function checkLogin(params) {
-  if(params.username == 'admin' && params.password == '123456') {
-    console.log("校验成功")
-    let datalist = [
-      {
-        msg: "success"
-      }
-    ]
-    return {data: datalist}
-  }else {
-    let datalist = [
-      {
-        msg: "fail",
-        data: params
-      }
-    ]
-    return {data: datalist}
-  }
-    // let datalist = [
-    //   params
-    // ]
-    // return {data:datalist}
-
-  // let datalist = []
-  // let newData = {
-  //   "type": "other",
-  //   "avatars_url": store.state.avatarsUrl,
-  //   "msg": Random.title(5),
-  // }
-  // datalist.push(newData)
-    // return {
-    //   data: datalist
-    // }
-  
-}
+// function checkLogin(params) {
+//   let params_data = JSON.parse(params.body)
+//   if(params.username == 'admin' && params.password == '123456') {
+//     console.log("校验成功")
+//     let datalist = [
+//       {
+//         msg: "success"
+//       }
+//     ]
+//     return {data: datalist}
+//   }else {
+//     let datalist = [
+//       {
+//         msg: "fail",
+//         data: params_data
+//       }
+//     ]
+//     return {data: datalist}
+//   }
+// }
 
 // 生成消息
 function createMsg() {
@@ -158,7 +143,30 @@ const get_dynamic_msg = Mock.mock('/dynamic',getDaymaticMsg)
 const area_region = Mock.mock('/area_region',getAreaRegion)
 const relation_list = Mock.mock('/relation_list',relationList)
 const create_msg = Mock.mock('/create_msg', createMsg)
-const check_login = Mock.mock('/check_login',checkLogin)
+const check_login = Mock.mock('/check_login','post',req => {
+  const { username, password } = JSON.parse(req.body); //将传递进来的数据保存
+  // for (let i = 0; i < userList.data.userinfo.length; i++) { 
+    //判断userList中是否存在该用户并且用户密码是否正确
+  if(username === store.state.registerMsg.username && password === store.state.registerMsg.password) {
+    return {
+      meta: {
+        msg: 'success',
+        status: 200
+      },
+      user: {
+        username: username,
+        password: password
+      }
+    }
+  }else {
+    return {
+      meta: {
+          msg: 'error',
+          status: 201
+      }
+    }
+  }
+})
 
 export default {
   data,

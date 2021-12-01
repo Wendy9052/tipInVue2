@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 登录
 export function Login(data) {
-  return axios.get('/check_login',data)
+  return axios.post('/check_login',data)
 }
 
 // 生成消息

@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import Mock from 'mockjs'
+import { mapState,mapActions } from 'vuex'
 import { Login } from "@/api/api"
 import { Toast } from "vant"
 export default {
@@ -54,9 +56,14 @@ export default {
       pswIsError: false,
     }
   },
+  computed: {
+    ...mapState(['registerMsg'])
+  },
   methods: {
+    ...mapActions(['SET_REGISTER_MSG']),
     // 点击登录/注册
     async onClickButton() {
+      console.log("res_Random",)
       console.log("checkde",this.checked)
       if(this.ifShowRePsw) {
         // 注册
@@ -69,29 +76,51 @@ export default {
         }else if(this.checked == false) {
           Toast("勾选同意协议后才能注册")
         }
+        let registerMsg = {
+          username: this.username,
+          password: this.password,
+        }
+        this.SET_REGISTER_MSG(registerMsg)
+        this.btn_text = "登录"
+        this.ifShowRePsw = false
       }else {  
         // 登录
-        // if(!this.username) {
-        //   Toast("邮箱或手机号不能为空")
-        // }else if(!this.password) {
-        //   Toast("密码不能为空")
-        // }else if(this.checked == false) {
-        //   Toast("勾选同意协议后才能登录")
-        // }
+        if(!this.username) {
+          Toast("邮箱或手机号不能为空")
+        }else if(!this.password) {
+          Toast("密码不能为空")
+        }else if(this.checked == false) {
+          Toast("勾选同意协议后才能登录")
+        }
         let params = {
           username: this.username,
           password: this.password
         }
-        // await Login({ params:params }).then(res => {
-        //   console.log("res",res)
-        // })
-        // await Login(params).then(res => {
-        //   console.log("res",res)
+        // 成了3 —— 请求接口方法3
+        await Login(params).then(res => {
+          localStorage.setItem('token',Mock.Random.natural())
+          this.$router.push({
+            name:"message"
+          })
+        })
+        // 成了2 —— 请求接口方法2
+        // this.$http({
+        //   method:'post',
+        //   url:'/check_login',
+        //   data:params
+        // }).then(res=>{
+        //   console.log(res)
+        //   let code = res.data.meta.status
+        //   if(code == '200'){
+        //     // this.$router.push('/home')
+        //     console.log("code 200")
+        //   }
         // })
 
-        this.$http.get("/check_login",params).then(res=>{
-          console.log("login_res",res)
-        })
+        // 成了1 —— 请求接口方法1
+        // this.$http.post("/check_login",params).then(res=>{
+        //   console.log("login_res",res)
+        // })
       }
     },
     // 校验邮箱/手机号
@@ -100,28 +129,28 @@ export default {
       let phone_test = /^1[0-9]{10}$/
       let flag = false
       console.log("邮箱校验",email_test.test(this.username))
-      // if( this.username != '') {
-      //   if(!phone_test.test(this.username) && !flag){
-      //     this.email_error_tip = "请输入正确的手机号"
-      //     flag = false
-      //   }else {
-      //     this.email_error_tip = ""
-      //     flag = true
-      //   }
-      //   if(!flag) {
-      //     if(!email_test.test(this.username)) {
-      //       this.email_error_tip = "请输入正确的邮箱"
-      //       flag = false
-      //     }else {
-      //       this.email_error_tip = ""
-      //       flag = true
-      //     }
-      //   }
-      //   this.emailIsError = true
-      // }else {
-      //   this.email_error_tip = ""
-      //   this.emailIsError = false
-      // }
+      if( this.username != '') {
+        if(!phone_test.test(this.username) && !flag){
+          this.email_error_tip = "请输入正确的手机号"
+          flag = false
+        }else {
+          this.email_error_tip = ""
+          flag = true
+        }
+        if(!flag) {
+          if(!email_test.test(this.username)) {
+            this.email_error_tip = "请输入正确的邮箱"
+            flag = false
+          }else {
+            this.email_error_tip = ""
+            flag = true
+          }
+        }
+        this.emailIsError = true
+      }else {
+        this.email_error_tip = ""
+        this.emailIsError = false
+      }
       
     },
     // 判断密码长度是否小于6位

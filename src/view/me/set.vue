@@ -41,7 +41,7 @@
         <van-cell center>
           <template #title>
             <div class="left_box">
-              <div class="btn_text">退出登录</div>
+              <div class="btn_text" @click="logOut()">退出登录</div>
             </div>
           </template>
         </van-cell>
@@ -67,10 +67,6 @@
 </template>
 
 <script>
-// import Vue from 'vue';
-// import { Popup } from 'vant';
-
-// Vue.use(Popup);
 export default {
   components: {
   },
@@ -157,6 +153,13 @@ export default {
     }
   },
   methods: {
+    // 退出登录
+    logOut() {
+      localStorage.removeItem("token")
+      this.$router.replace({
+        name:"login"
+      })
+    },
     quitOuit() {
       this.showQuit = true
     },

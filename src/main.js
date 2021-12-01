@@ -21,13 +21,13 @@ const whiteList = [
   '/user/login'
 ]//no redirect whitelist
 
-const handleRouter = (to, next) => {
-  if (whiteList.includes(to.path)) {
-    next('/')
-  } else {
-    next()
-  }
-}
+// const handleRouter = (to, next) => {
+//   if (whiteList.includes(to.path)) {
+//     next('/')
+//   } else {
+//     next()
+//   }
+// }
 
 router.beforeEach((to, from, next) => {
   // 是否登录

@@ -18,6 +18,10 @@ const store = new Vuex.Store({
       },
       avatarsUrl: "", //头像
       bg_img_url: "", //背景图
+      registerMsg:  {
+        username: "",
+        password: "",
+      }
   },
   getters: {
     getSex(state) {
@@ -31,6 +35,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    set_registerMsg(state, payload) { //存注册信息
+      state.registerMsg = payload
+    },
     set_bg(state, payload) {
       state.bg_img_url = payload  //存背景图
     },
@@ -57,6 +64,9 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    SET_REGISTER_MSG(context, payload) {  //存注册信息
+      context.commit('set_registerMsg', payload) 
+    },
     SET_BG(context, payload) {  //存背景图地址
       context.commit("set_bg", payload)
     },
