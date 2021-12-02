@@ -36,7 +36,7 @@ export default new Router({
     {
       path: '/user/login',  
       name: 'login',  
-      component: login  //聊天列表
+      component: login  //登录注册页
     },
     {
       path: '/message/chat',
