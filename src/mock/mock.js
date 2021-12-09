@@ -144,7 +144,7 @@ const area_region = Mock.mock('/area_region',getAreaRegion)
 const relation_list = Mock.mock('/relation_list',relationList)
 const create_msg = Mock.mock('/create_msg', createMsg)
 const check_login = Mock.mock('/check_login','post',req => {
-  const { username, password } = JSON.parse(req.body); //将传递进来的数据保存
+const { username, password } = JSON.parse(req.body); //将传递进来的数据保存
   // for (let i = 0; i < userList.data.userinfo.length; i++) { 
     //判断userList中是否存在该用户并且用户密码是否正确
   if(username === store.state.registerMsg.username && password === store.state.registerMsg.password) {
